@@ -1,0 +1,1 @@
+ALTER TABLE medicamentos ADD COLUMN IF NOT EXISTS unidade TEXT;
