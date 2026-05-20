@@ -21,7 +21,7 @@ export async function createSemen(tenantSlug: string, formData: FormData) {
   const payload = buildPayload(formData, tenantId)
   if (typeof payload === 'string') return { error: payload }
 
-  const { error } = await admin.from('semen').insert(payload)
+  const { error } = await (admin as any).from('semen').insert(payload)
   if (error) return { error: error.message }
 
   revalidatePath(`/${tenantSlug}/cadastros/semen`)
@@ -40,7 +40,7 @@ export async function updateSemen(tenantSlug: string, semenId: string, formData:
   const payload = buildPayload(formData, tenantId)
   if (typeof payload === 'string') return { error: payload }
 
-  const { error } = await admin.from('semen').update(payload).eq('id', semenId).eq('tenant_id', tenantId)
+  const { error } = await (admin as any).from('semen').update(payload).eq('id', semenId).eq('tenant_id', tenantId)
   if (error) return { error: error.message }
 
   revalidatePath(`/${tenantSlug}/cadastros/semen`)
@@ -52,7 +52,7 @@ export async function deleteSemen(tenantSlug: string, semenId: string) {
   const tenantId = await getTenantId(tenantSlug)
   if (!tenantId) return { error: 'Não autorizado.' }
 
-  const { error } = await admin.from('semen').delete().eq('id', semenId).eq('tenant_id', tenantId)
+  const { error } = await (admin as any).from('semen').delete().eq('id', semenId).eq('tenant_id', tenantId)
   if (error) return { error: error.message }
 
   revalidatePath(`/${tenantSlug}/cadastros/semen`)

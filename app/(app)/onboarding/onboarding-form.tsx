@@ -28,7 +28,7 @@ const COMPANY_SIZES = [
   { value: '100+',   label: 'Mais de 100 funcionários' },
 ]
 
-export function OnboardingForm({ userId, userEmail }: { userId: string; userEmail?: string }) {
+export function OnboardingForm({ userId, userEmail, preview }: { userId: string; userEmail?: string; preview?: boolean }) {
   const [mode, setMode] = useState<'create' | 'join'>('create')
   const [companyName, setCompanyName] = useState('')
   const [error, setError] = useState('')

@@ -8,7 +8,7 @@ export default async function SemenPage({ params }: { params: Promise<{ tenant: 
   const { data: tenant } = await admin.from('tenants').select('id').eq('slug', tenantSlug).single()
   if (!tenant) return null
 
-  const { data: semens } = await admin
+  const { data: semens } = await (admin as any)
     .from('semen')
     .select('id, nome_touro, registro_rgd, raca, apelido_codigo, central_coleta, tipo, qtd_doses, status')
     .eq('tenant_id', tenant.id)

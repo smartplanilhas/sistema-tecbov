@@ -15,7 +15,7 @@ export default async function EditarSemenPage({
   const { data: tenant } = await admin.from('tenants').select('id').eq('slug', tenantSlug).single()
   if (!tenant) notFound()
 
-  const { data: semen } = await admin
+  const { data: semen } = await (admin as any)
     .from('semen')
     .select('*')
     .eq('id', id)
@@ -23,6 +23,7 @@ export default async function EditarSemenPage({
     .single()
 
   if (!semen) notFound()
+  const semenData = semen as any
 
   return (
     <div className="max-w-3xl space-y-6">
@@ -34,9 +35,9 @@ export default async function EditarSemenPage({
           <ChevronLeft className="h-4 w-4" /> Voltar para sêmen
         </Link>
         <h1 className="text-2xl font-bold">Editar sêmen</h1>
-        <p className="text-muted-foreground text-sm">{semen.nome_touro}</p>
+        <p className="text-muted-foreground text-sm">{semenData.nome_touro}</p>
       </div>
-      <SemenForm tenantSlug={tenantSlug} semen={semen} />
+      <SemenForm tenantSlug={tenantSlug} semen={semenData} />
     </div>
   )
 }
